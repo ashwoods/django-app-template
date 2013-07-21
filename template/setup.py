@@ -11,6 +11,9 @@ def read_file(filename):
     except IOError:
         return ''
 
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
+
 
 setup(
     name='django-{{ app_name }}',
@@ -19,6 +22,8 @@ setup(
     author_email='<Include Your Email Here>',
     packages=find_packages(),
     include_package_data=True,
+    install_requires=required,
+    tests_requires=['coverage', 'flake8'],
     url='<Include Link to Project>',
     license='<Include License Name>',
     description=u' '.join(__import__('{{ app_name }}').__doc__.splitlines()).strip(),
@@ -26,7 +31,6 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Intended Audience :: Developers',
         'Programming Language :: Python',      
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Framework :: Django',
         'Development Status :: 4 - Beta',
